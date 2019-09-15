@@ -26,12 +26,12 @@ def cities_lookup(request):
     cache_city_key = city_search.lower()
     results = cache.get(cache_city_key)
 
-    if results is None:
+        if results is None:
         results = []
         cities = City.objects.all()
         for city in cities:
             if city_search in city.name:
                 results.append(city.name)
-                cache.set(cache_city_key, results)
+        cache.set(cache_city_key, results)
 
     return JsonResponse(results, safe=False)
